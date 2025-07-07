@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/ # Folder virtual environment Anda
+*.env
+.env
+.pytest_cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.vscode/ # Jika Anda menggunakan VS Code, ini bisa diabaikan
+
+# Machine Learning specific
+*.pkl # Model dan preprocessor yang disimpan (jika ukurannya besar)
+*.joblib # Model dan preprocessor yang disimpan (jika ukurannya besar)
+*.csv # Dataset (jika ukurannya besar atau sensitif)
+
+# Flask specific
+instance/
+.flaskenv
+
+# Operating System files
+.DS_Store # macOS
+Thumbs.db # Windows

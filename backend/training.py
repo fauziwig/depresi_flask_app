@@ -1,4 +1,5 @@
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+# from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.svm import SVC
 from sklearn.model_selection import RepeatedStratifiedKFold, cross_val_score
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, PowerTransformer
@@ -11,12 +12,12 @@ from joblib import dump
 import matplotlib.pyplot as plt
 
 def load_data():
-    df = pd.read_csv('./stroke-data.csv')
-    df = df.drop('id', axis=1)
-    categorical = ['hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'smoking_status']
-    numerical = ['avg_glucose_level', 'bmi', 'age']
-    y = df['stroke']
-    X = df.drop('stroke', axis=1)
+    df = pd.read_csv('/kaggle/input/depression-professional-dataset/Depression Professional Dataset.csv')
+    # df = df.drop('id', axis=1)
+    categorical = ['Gender', 'Sleep Duration','Dietary Habits', 'Have you ever had suicidal thoughts ?', 'Family History of Mental Illness']
+    numerical = ['Age', 'Work Pressure', 'Job Satisfaction', 'Work Hours', 'Financial Stress']
+    y = df['Depression']
+    X = df.drop('Depression', axis=1)
     return X, y, categorical, numerical
 
 def evaluate_model(X, y, model):
@@ -29,7 +30,9 @@ X, y, categorical, numerical = load_data()
 print(X.shape, y.shape)
 
 # Define the LDA model
-model = LinearDiscriminantAnalysis()
+# model = LinearDiscriminantAnalysis()
+# Gunakan kernel 'rbf' sebagai awal yang baik, dan set probability=True
+model = SVC(kernel='rbf', probability=True, random_state=42)
 
 # Prepare the pipeline
 transformer = ColumnTransformer(transformers=[
@@ -49,11 +52,12 @@ scores = evaluate_model(X, y, pipeline)
 # print('LDA %.3f (%.3f)' % (np.mean(scores), np.std(scores)))
 
 # Plot the results
-plt.boxplot([scores], labels=['LDA'], showmeans=True)
+# plt.boxplot([scores], labels=['LDA'], showmeans=True)
+plt.boxplot([scores], labels=['SVM'], showmeans=True)
 plt.show()
 
 # Fit the pipeline on the entire dataset
 pipeline.fit(X, y)
 
 # Save the trained pipeline
-dump(pipeline, 'stroke_prediction_model.joblib')
+dump(pipeline, 'depression_prediction_model.joblib')
