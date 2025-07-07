@@ -14,9 +14,9 @@ venv/ # Folder virtual environment Anda
 .vscode/ # Jika Anda menggunakan VS Code, ini bisa diabaikan
 
 # Machine Learning specific
-*.pkl # Model dan preprocessor yang disimpan (jika ukurannya besar)
-*.joblib # Model dan preprocessor yang disimpan (jika ukurannya besar)
-*.csv # Dataset (jika ukurannya besar atau sensitif)
+#*.pkl # Model dan preprocessor yang disimpan (jika ukurannya besar)
+#*.joblib # Model dan preprocessor yang disimpan (jika ukurannya besar)
+#*.csv # Dataset (jika ukurannya besar atau sensitif)
 
 # Flask specific
 instance/
