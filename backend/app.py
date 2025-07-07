@@ -6,9 +6,6 @@ from flask_cors import CORS
 # Load the trained model
 model = load('./depression_prediction_model.joblib')
 
-#initialize the flask app
-app = Flask(__name__)
-CORS(app)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -47,4 +44,8 @@ def home():
     return "Welcome to the Stroke Prediction API"
 
 if __name__ == "__main__":
+
+    #initialize the flask app
+    app = Flask(__name__)
+    CORS(app)
     app.run(host='0.0.0.0', port=5000, debug=True)
